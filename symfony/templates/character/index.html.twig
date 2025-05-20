@@ -1,0 +1,43 @@
+{#  #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Postacie w Rick and Morty
+{% endblock %}
+
+{% block body %}
+
+	{# Wyświetlenie postaci #}
+	<h1 class="text-center">Postacie występująca w serialu Rick and Morty</h1>
+	<div class="flex flex-wrap justify-center gap-6">
+		{% for character in characters %}
+			<div class="flex flex-col bg-white rounded-lg shadow-sm md:flex-row md:max-w-xl w-[550px] h-[200px]">
+				<img class="object-cover w-full h-full rounded-t-lg md:w-48 md:rounded-none md:rounded-s-lg my-0" src="{{character.image}}" alt="">
+				<div class="flex flex-col p-4 leading-normal">
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{character.name}}</h5>
+					<div class="mb-3 font-normal text-gray-700 h-full">
+						<p class="mt-0 mb-2">
+							{{ character.gender == "Male" ? "Wystąpił" : character.gender == "Female" ? "Wystąpiła" : "Wystąpiło"}}
+
+							w
+							{{ character.episode|length }}
+							{{ character.episode|length == 1 ? 'odcinku' : 'odcinkach' }}:
+						</p>
+
+						<div class="flex flex-row gap-1 flex-wrap overflow-y-auto max-h-[100px]">
+							{% for episode in character.episode %}
+								{% set segments = episode|split('/') %}
+								<span class="bg-white border border-gray-300 px-2 py-1 rounded text-sm text-center h-8 w-8">
+									{{ segments|last }}
+								</span>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	{# Paginacja #}
+	{% include 'components/_pagination.html.twig' with { page: page, info: info, routeName: 'get_all_characters' } %}
+
+{% endblock %}

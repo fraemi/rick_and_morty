@@ -1,0 +1,45 @@
+{# Komponent obsługujący paginację #}
+<nav>
+	<ul class="flex items-center -space-x-px h-10 text-base list-none justify-center">
+		<li>
+			<a href="{{ path(routeName, { page: 1 }) }}" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white rounded-s-lg hover:bg-gray-100 hover:text-gray-700 {{ page == 1 ? 'pointer-events-none opacity-50' : '' }}">
+				<span class="sr-only">Pierwsza</span>
+				<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M16.444 18.01L10.432 12L16.444 5.98999L17.859 7.40399L13.259 12.004L17.859 16.604L16.444 18.01ZM8.14404 18H6.14404V5.99999H8.14404V18Z" fill="currentColor"/>
+				</svg>
+			</a>
+		</li>
+
+		<li>
+			<a href="{{ path(routeName, { page: page - 1 }) }}" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 {{ page == 1 ? 'pointer-events-none opacity-50' : '' }}">
+				<span class="sr-only">Poprzednia</span>
+				<svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 6 10">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+				</svg>
+			</a>
+		</li>
+
+		<li>
+			<a href="#" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white no-underline cursor-default">{{page}}
+				/
+				{{info.pages}}</a>
+		</li>
+		<li>
+			<a href="{{ path(routeName, { page: page + 1 }) }}" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 {{ page == info.pages ? 'pointer-events-none opacity-50' : '' }}">
+				<span class="sr-only">Następna</span>
+				<svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 6 10">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+				</svg>
+			</a>
+		</li>
+
+		<li>
+			<a href="{{ path(routeName, { page: info.pages }) }}" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white rounded-e-lg hover:bg-gray-100 hover:text-gray-700 {{ page == info.pages ? 'pointer-events-none opacity-50' : '' }}">
+				<span class="sr-only">Ostatnia</span>
+				<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M7.55804 18.01L6.14404 16.597L10.744 11.997L6.14404 7.40399L7.55804 5.98999L13.569 12L7.55904 18.01H7.55804ZM17.858 18H15.858V5.99999H17.858V18Z" fill="currentColor"/>
+				</svg>
+			</a>
+		</li>
+	</ul>
+</nav>
